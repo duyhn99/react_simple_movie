@@ -61,24 +61,22 @@ const Movie = () => {
         </button>
       </div>
       <div className='grid xl:grid-cols-4 gap-10 md:grid-cols-3 sm:grid-cols-2 grid-cols-1'>
-        {!loading && movies.length > 0 ? (
-          movies.map((movie: IMovie) => <MovieCard key={movie.id} item={movie} />)
-        ) : (
-          <MovieSkeleton />
-        )}
+        {!loading ? movies.map((movie: IMovie) => <MovieCard key={movie.id} item={movie} />) : <MovieSkeleton />}
       </div>
-      <div className='mt-10'>
-        <ReactPaginate
-          breakLabel={<Ellipsis className='w-5 h-5' />}
-          nextLabel={<ChevronRight className='w-5 h-5' />}
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={pageCount}
-          previousLabel={<ChevronLeft className='w-5 h-5' />}
-          renderOnZeroPageCount={null}
-          className='pagination'
-        />
-      </div>
+      {movies.length > 0 && (
+        <div className='mt-10'>
+          <ReactPaginate
+            breakLabel={<Ellipsis className='w-5 h-5' />}
+            nextLabel={<ChevronRight className='w-5 h-5' />}
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel={<ChevronLeft className='w-5 h-5' />}
+            renderOnZeroPageCount={null}
+            className='pagination'
+          />
+        </div>
+      )}
     </div>
   );
 };

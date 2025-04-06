@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { tmdbAPI } from '../../config';
 import { IMovie } from '../../interfaces/movie.interface';
 import Button from '../button/Button';
+import noPicture from '@/assets/no-pictures.png';
 
 const MovieCard = ({ item }: { item: IMovie }) => {
   const { title, poster_path, vote_average, release_date, id } = item;
@@ -10,7 +11,7 @@ const MovieCard = ({ item }: { item: IMovie }) => {
   return (
     <div className='movie-card flex flex-col rounded-lg bg-slate-800 p-3 text-white h-full select-none'>
       <img
-        src={`${tmdbAPI.imageOriginal(poster_path)}`}
+        src={poster_path ? `${tmdbAPI.imageOriginal(poster_path)}` : noPicture}
         alt='movie-img'
         loading='lazy'
         className='w-full h-[250px] object-cover rounded-lg mb-5 hover:scale-105 transition-all duration-300'
